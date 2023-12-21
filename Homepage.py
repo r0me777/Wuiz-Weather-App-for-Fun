@@ -13,9 +13,10 @@ mylabel2 = Label(root, text="Search where you want to see your Weather", fg="bla
 searchinput = Entry(root,background='light grey',borderwidth=5, width=50,)
 
 def funcclickzip(event):
-    print("Zip Code is: " + searchinput.get()) #Gets value of input box when you press enter button
+    print("Zip Code is: " + searchinput.get())  #Gets value of input box when you press enter button
 
 root.bind('<Return>', funcclickzip) #very rought but still
+h = searchinput.get()
 
 
 mylabel.pack()

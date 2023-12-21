@@ -13,11 +13,38 @@ class tkinterApp(tk.Tk): #Root Window
         #widgets
         # Current working on switching between "frames" for right now you have to comment one out if you want to work on it.
         #For example everything but the Weatherpage, is commeted out so the weather page is the only thing displaying
-        #self.Homepage = Homepage(self) #self = tkinterApp = master/parent
+        #self.Homepage = Homepage(self).pack(expand=True, fill="both")
+
+        self.Homepage = Homepage(self) #self = tkinterApp = master/parent
         self.Weatherpage = Weatherpage(self)
-        #self.Infopage = Infopage(self)
+        self.Infopage = Infopage(self)
+
+        self.current_frame = self.Infopage
+        self.show_frame()
 
         self.mainloop()
+
+    def show_frame(self):
+        for frame in [self.Homepage, self.Weatherpage, self.Infopage]:
+            if frame == self.current_frame:
+                frame.pack(expand=True, fill="both")
+            else:
+                frame.pack_forget()
+
+
+
+    def go_back(self):
+        # Switch to the previous frame
+        if self.current_frame == self.Homepage:
+            self.current_frame = self.Infopage
+        elif self.current_frame == self.Weatherpage:
+            self.current_frame = self.Homepage
+        elif self.current_frame == self.Infopage:
+            self.current_frame = self.Weatherpage
+
+        self.show_frame()
+
+
 
 
 class Homepage(tk.Frame):
@@ -59,16 +86,19 @@ class Homepage(tk.Frame):
         mylabel2.pack()  # packs label into frame
         searchinput.pack()  # packs search into frame
 
-        self.pack(expand=True, fill="both")  # packs the frame on the root window, very important remember to put this
+        #Set Homepage a starting point, but I set Weather app as homepage, and then backbutton removes the current page from
+        #the window and then packs the page its going to.
+        #self.pack(expand=True, fill="both")  # packs the frame on the root window, very important remember to put this
 
 
 class Weatherpage(tk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
-        self.pack(expand=True, fill="both")
+
         # Back Button at corner => to homepage
 
-        backbutton = Button(self, text="Back", fg="black", font=("Helvetica", 10), width=30)
+        backbutton = Button(self, text="Back", fg="black", font=("Helvetica", 10), width=30,command=parent.go_back)
+
         backbutton.pack(side=TOP, anchor=NW)  # Back button, put on the top left of the window
         # Top Label "Current Location Weather Data"
         mylabel = Label(self, text="Current Location Weather Data", fg="black", font=("Helvetica", 20), padx=20,
@@ -96,12 +126,13 @@ class Weatherpage(tk.Frame):
         tempgraph = Canvas(tempdaygraph_frame, width=850, height=200, background="light grey", border=10)
         tempgraph.pack()  # Canvas in frame, its just a place holder
 
+
 class Infopage(tk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
-        self.pack(expand=True, fill="both")
+        #self.pack(expand=True, fill="both")
         backbutton = Button(self, text="Back", fg="black", font=("Helvetica", 10),
-                            width=30)  # Back button does nothing
+                            width=30,command=parent.go_back)  # Back button does nothing
         backbutton.pack(side=TOP, anchor=NW)  # Back button, put on the top left of the window
 
         # Top Label "Current Location Weather Data"
@@ -134,6 +165,9 @@ class Infopage(tk.Frame):
 
 if __name__ == '__main__':
     tkinterApp()
+
+
+
 
 
 

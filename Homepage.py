@@ -36,9 +36,10 @@ themeButton = Button(root, text = "Change Theme", command = changeTheme)
 themeButton.pack(side = TOP, anchor = NE, padx = 10, pady = 10)
 
 def funcclickzip(event):
-    print("Zip Code is: " + searchinput.get()) #Gets value of input box when you press enter button
+    print("Zip Code is: " + searchinput.get())  #Gets value of input box when you press enter button
 
 root.bind('<Return>', funcclickzip) #very rought but still
+h = searchinput.get()
 
 
 mylabel.pack()

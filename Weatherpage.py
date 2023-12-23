@@ -1,4 +1,8 @@
 from tkinterappfile import *
+from datetime import datetime
+from meteostat import Hourly
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 class Weatherpage(tk.Frame):
     def __init__(self, parent):
@@ -29,9 +33,29 @@ class Weatherpage(tk.Frame):
             weeklist[i].pack(side='left')  # All pack in horizontly gots to fix.
 
         # Temp and Time Graph made from data ranges of tempature from Mon - Sun
-        tempdaygraph_frame = Frame(self, width=600, height=200, background="white", border=10, pady=30,
-                                   padx=30)  # Frame might not be the best but oh well
+        tempdaygraph_frame = Frame(self, width=600, height=200, background="white", border=10, pady=20,
+                                   padx=20)  # Frame might not be the best but oh well
         tempdaygraph_frame.pack()  # Graph frame from temp data
-        tempgraph = Canvas(tempdaygraph_frame, width=850, height=200, background="light grey", border=10)
-        tempgraph.pack()  # Canvas in frame, its just a place holder
+
+        self.plot_temperature_graph(tempdaygraph_frame)
+
+    def plot_temperature_graph(self, frame):
+        # Set time period
+        start = datetime(2018, 1, 1)
+        end = datetime(2018, 1, 7)
+
+        # Get hourly data
+        data = Hourly('10637', start, end)
+        data = data.fetch()
+
+        # Create Matplotlib figure and plot
+        fig, ax = plt.subplots(figsize=(4, 3))
+        data.plot(y=['temp'], ax=ax, legend=False)
+        plt.xlabel('Date')
+        plt.ylabel('Temperature (°C)')
+
+        # Embed Matplotlib plot in Tkinter window
+        canvas = FigureCanvasTkAgg(fig, master=frame)
+        canvas_widget = canvas.get_tk_widget()
+        canvas_widget.pack()
 

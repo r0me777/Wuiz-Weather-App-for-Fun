@@ -30,8 +30,10 @@ class Homepage(tk.Frame):
         sunImage = Image.open("Pngs/sun.png").resize((30, 30))
         moonImage = Image.open("Pngs/moon.png").resize((30, 30))
 
+
         sunIcon = ImageTk.PhotoImage(sunImage)
         moonIcon = ImageTk.PhotoImage(moonImage)
+
 
         # label1 = tk.Label(self,background="White").pack(fill="both", expand=True)
 

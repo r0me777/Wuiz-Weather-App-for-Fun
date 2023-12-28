@@ -1,17 +1,18 @@
 from tkinterappfile import *
 
+
 class Infopage(tk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
-        #self.pack(expand=True, fill="both")
+        # self.pack(expand=True, fill="both")
         backbutton = Button(self, text="Back", fg="black", font=("Helvetica", 10),
-                            width=30,command=parent.go_back)  # Back button does nothing
-        backbutton.pack(side=TOP, anchor=NW)  # Back button, put on the top left of the window
+                            command=parent.go_back)  # Back button does nothing
+        backbutton.pack(side=TOP, anchor=NW, padx=15, pady=10)  # Back button, put on the top left of the window
 
         # Top Label "Current Location Weather Data"
-
-        mylabel = Label(self, text="Infographics: '..............' ", fg="black", font=("Helvetica", 20), padx=50,
-                        pady=100)  # Label
+        label_frame = LabelFrame(self, background="#003f39", padx=5, pady=5, foreground="#5c9aef")
+        label_frame.pack()
+        mylabel = Label(label_frame, text="Infographics: '..............' ", font=("Helvetica", 20), background="#5c9aef")  # Label
         mylabel.pack()  # might use grid but pack seems to work
 
         # print(main.winfo_width()) ignore

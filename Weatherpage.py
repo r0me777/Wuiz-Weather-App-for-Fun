@@ -3,19 +3,20 @@ from datetime import datetime
 from meteostat import Hourly
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from PIL import Image, ImageTk
+
 
 class Weatherpage(tk.Frame):
+
     def __init__(self, parent):
         super().__init__(parent)
 
         # Back Button at corner => to homepage
+        backbutton = Button(self, text="Back", command=parent.go_back)
 
-        backbutton = Button(self, text="Back", fg="black", font=("Helvetica", 10), width=30,command=parent.go_back)
-
-        backbutton.pack(side=TOP, anchor=NW)  # Back button, put on the top left of the window
+        backbutton.pack(side="top", anchor=NW, pady=15, padx=15)  # Back button, put on the top left of the window
         # Top Label "Current Location Weather Data"
-        mylabel = Label(self, text="Current Location Weather Data", fg="black", font=("Helvetica", 20), padx=20,
-                        pady=20)
+        mylabel = Label(self, text="Current Location Weather Data", fg="black", font=("Helvetica", 20), padx=20, )
         mylabel.pack()
 
         tempday_frame = Frame(self, width=400, height=200, background="white", border=10, pady=30,
@@ -58,4 +59,3 @@ class Weatherpage(tk.Frame):
         canvas = FigureCanvasTkAgg(fig, master=frame)
         canvas_widget = canvas.get_tk_widget()
         canvas_widget.pack()
-

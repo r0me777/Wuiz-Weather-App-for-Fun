@@ -48,6 +48,12 @@ class Homepage(tk.Frame):
         # moves the button to the top right corner
 
         themeButton.pack(side="top", anchor="ne", padx=10, pady=10)
+
+        # Forward Button at corner => to homepage
+        forwardbutton = Button(self, text="Next", command=parent.go_forward)
+
+        forwardbutton.pack(side="top", anchor=NE, pady=15, padx=15)  # Back button, put on the top left of the window
+
         # packs color button into frame
         mylabel.pack()  # packs label into frame
         mylabel2.pack()  # packs label into frame

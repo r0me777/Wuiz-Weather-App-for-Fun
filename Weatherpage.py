@@ -11,10 +11,18 @@ class Weatherpage(tk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
 
+        buttonframe = tk.Frame(self)
+        buttonframe.pack()
         # Back Button at corner => to homepage
-        backbutton = Button(self, text="Back", command=parent.go_back)
+        backbutton = Button(buttonframe, text="Back", command=parent.go_back)
 
-        backbutton.pack(side="top", anchor=NW, pady=15, padx=15)  # Back button, put on the top left of the window
+        backbutton.grid(sticky=NW, padx=15, row=0, column=0)  # Back button, put on the top left of the window
+        # Top Label "Current Location Weather Data"
+
+        # Forward Button at corner => to homepage
+        forwardbutton = Button(buttonframe, text="Next", command=parent.go_forward,)
+
+        forwardbutton.grid(sticky=NE, padx=15,row=0, column=1)  # Back button, put on the top left of the window
         # Top Label "Current Location Weather Data"
         mylabel = Label(self, text="Current Location Weather Data", fg="black", font=("Helvetica", 20), padx=20, )
         mylabel.pack()

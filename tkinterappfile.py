@@ -46,6 +46,13 @@ class tkinterApp(tk.Tk): #Root Window
             self.current_frame = self.Homepage
         elif self.current_frame == self.Infopage:
             self.current_frame = self.Weatherpage
+        self.show_frame()
+    def go_forward(self):
+        # Switch to the next frame
+        if self.current_frame == self.Homepage:
+            self.current_frame = self.Weatherpage
+        elif self.current_frame == self.Weatherpage:
+            self.current_frame = self.Infopage
 
         self.show_frame()
 

@@ -59,7 +59,7 @@ class Weatherpage(tk.Frame):
         end = datetime(2018, 1, 7)
 
         # Get Daily data
-        data = Daily('10637', start, end)
+        data = Daily('72243', start, end)
         data = data.fetch()
         #print(data)
 
@@ -82,7 +82,7 @@ class Weatherpage(tk.Frame):
         end = datetime(2018, 1, 7)
 
         # Get Daily data
-        data = Daily('10637', start, end)
+        data = Daily('72243', start, end)
         data = data.fetch()
         print(data)
         #Get lists of max temps for each day
